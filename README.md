@@ -25,8 +25,6 @@
 
 ## **_1. Clientes para Oracle Database (en Mint/Debian)_**
 
-> **Versión:** ...
-
 ### **_1.1 Cliente gráfico: SQL Developer_**
 
 Comenzamos con los clientes para Oracle, donde el primero será el cliente gráfico SQL Developer. Lo primero es instalar un JDK compatible con la versión de SQL Developer que vayamos a descargar, así que debemos comprobarla primero. Primero actualizaremos la lista de paquetes, seguidamente instalaremos Java y mostraremos la versión de este:
@@ -39,11 +37,11 @@ sudo apt install default-jdk unzip
 java --version
 ```
 
-![Versión de java](img/VersionJava.png)
+![Versión de java](img/oracle/1.1-SQL_Developer/VersionJava.png)
 
 Descargamos el ZIP de SQL Developer (enlace [aquí](https://www.oracle.com/database/sqldeveloper/technologies/download)) en nuestra máquina virtual:
 
-![Descarga SQL Developer](img/sqldeveloper.png)
+![Descarga SQL Developer](img/oracle/1.1-SQL_Developer/sqldeveloper.png)
 
 Accedemos a la carpeta de descargas con `cd Descargas` y vamos a descomprimir en /opt usando el nombre real del archivo con `sudo unzip NOMBRE_ARCHIVO_SQLDEVELOPER.zip -d /opt/`
 
@@ -51,7 +49,7 @@ E iniciamos SQL Developer con `/opt/sqldeveloper/sqldeveloper.sh`.
 
 <!--(En este punto, ha saltado la incidencia 1)-->
 
-![Inicio Oracle SQL Developer](img/sqldeveloper_bd.png)
+![Inicio Oracle SQL Developer](img/oracle/1.1-SQL_Developer/sqldeveloper_bd.png)
 
 ---
 
@@ -80,7 +78,7 @@ Y dentro de Oracle SQL Developer crearemos una conexión donde:
 
 En caso de que el cliente esté en la misma VM (que es este caso) usaremos **localhost**; si está en otro equipo, usaremos la **IP del servidor** y comprobaremos que la red permita el acceso.
 
-![Conexión usuario](img/ConexionSQL.png)
+![Conexión usuario](img/oracle/1.1-SQL_Developer/ConexionSQL.png)
 
 > Nota: Para comprobar que está bien, abajo a la izquierda debe salir **Estado: Correcto**.
 
@@ -90,7 +88,7 @@ En caso de que el cliente esté en la misma VM (que es este caso) usaremos **loc
 
 Pasamos a otro cliente gráfico. En este caso será el **VSCode y la extensión SQL Developer**. Lo primero será descargar el paquete .deb actual de VSCode (enlace [aquí](https://code.visualstudio.com/)) y una vez que lo tengamos descargado accedemos a la carpeta de **Descargas** (en caso de que no estemos en ella) e instalamos el paquete con los siguientes comandos:
 
-![Descarga VSCode](img/descarga_vscode.png)
+![Descarga VSCode](img/oracle/1.2-VSCode_y_SQL_Developer/descarga_vscode.png)
 
 ```
 cd ~/Descargas
@@ -100,13 +98,15 @@ sudo apt install ./NOMBRE_DEL_ARCHIVO_CODE.deb
 
 Seguidamente, abriremos VS Code (desde la terminal es poniendo `code` y se abre) y en las extensiones buscamos e instalamos la de **Oracle SQL Developer for VS Code**, configurando una conexión a **FREEPDB1** como **orauser**.
 
-![Conexión SQL en VS Code](img/sql_vscode.png)
+![Conexión SQL en VS Code](img/oracle/1.2-VSCode_y_SQL_Developer/sql_vscode.png)
 
 ---
 
 ### **_1.3 Cliente de terminal: SQL*Plus_**
 
 Para Mint (como es este caso) usaremos los ZIP oficiales de Oracle Instant Client para Linux x86-64 Basic y SQL*Plus de la misma versión (enlace [aquí](https://www.oracle.com/database/technologies/instant-client/downloads.html)) y la vamos a descomprimir ambas en un mismo directorio. La ruta será ~/oracle_amparo
+
+![Descarga ZIP clientes](img/oracle/1.3-SQLPlus/clientes_zip.png)
 
 ```
 mkdir -p ~/oracle_amparo
@@ -118,7 +118,13 @@ unzip ~/Descargas/NOMBRE_SQL_PLUS.zip -d ~/oracle_amparo
 ls ~/oracle_amparo
 ```
 
-Entraremos al directorio **instaclient_...** creado por los ZIP y comprobaremos los ejecutables. En caso de que sea necesario, configuraremos las rutas de bibliotecas dependiendo de las instrucciones oficiales de la versión:
+> Nota: Es posible que al descomprimir el segundo en la carpeta (ya sea el basic o el SQL) nos preguntará si queremos reemplazar algunos archivos (ya que ambos ZIP contienen archivos iguales), por lo que debemos escribir **A** (de All) para unificar todos los archivos sin repetirse.
+
+Quedando el contenido de la carpeta que creamos de la siguiente manera:
+
+![Contenido carpeta oracle_amparo](img/oracle/1.3-SQLPlus/contenido_oracle_amparo.png)
+
+Entraremos al directorio **instaclient_...** creado por los ZIP y comprobaremos los ejecutables. En caso de que sea necesario, configuraremos las rutas de bibliotecas dependiendo de las instrucciones oficiales de la versión. Configuramos las variables de entorno y seguidamente probamos la conexión:
 
 > Nota: sustituye instaclient_XX_X por el directorio real
 
@@ -132,7 +138,11 @@ sqlplus -v
 sqlplus orauser@//localhost:1521/FREEPDB1
 ```
 
-> En caso de que la biblioteca **libaio** falta, instalaremos el paquete corresponiente a la distribución. Pedirá la contraseña en la terminal.
+![Conexión orauser](img/oracle/1.3-SQLPlus/conexion_orauser.png)
+
+> Error documentado: En caso de que la biblioteca **libaio** falta, instalaremos el paquete corresponiente a la distribución. Pedirá la contraseña en la terminal.
+
+---
 
 ### **_1.4 Cliente de terminal: SQLcl_**
 
@@ -144,9 +154,11 @@ sudo apt install default-jdk unzip
 java --version
 ```
 
-![Versión Java](img/VersionJava.png)
+![Versión Java](img/oracle/1.4-SQLcl/VersionJava.png)
 
 Descargamos SQLcl (enlace [aquí](https://www.oracle.com/database/sqldeveloper/technologies/sqlcl/download/)) y se descomprime el zip:
+
+![Descarga SQLcl](img/oracle/1.4-SQLcl/descarga_sqlcl.png)
 
 ```
 cd ~/Descargas
@@ -156,17 +168,17 @@ unzip NOMBRE_DEL_ARCHIVO_SQLCL.zip -d ~/sqlcl
 ~/sqlcl/sqlcl/bin/sql -version
 ```
 
+![Versión SQLcl](img/oracle/1.4-SQLcl/sqlcl_version.png)
+
 > En caso de que se quiera poder ejecutar sql desde cualquier terminal, añade `export PATH="$HOME/sqlcl/sqlcl/bin:$PATH"` a ~/.bashrc y abre una terminal nueva 
 
 Ahora, probaremos la conexión con orauser y FREEPDB1 (sin contraseña)
 
-![Conexión orauser y FREEPDB1]()
+![Conexión orauser y FREEPDB1](img/oracle/1.4-SQLcl/conexion_sqlcl.png)
 
 ---
 
 ## **_2. Clientes para postgreSQL_**
-
-> **Versión:** ...
 
 ### **_2.1 Cliente de terminal: psql_**
 
@@ -179,10 +191,12 @@ sudo apt install postgresql-client
 
 psql --version
 
-psql -h localhost -U pguser -d dbpg -W
+psql -U pguser -d dbpg -W
 ```
 
-> Instala el paquete correspondiente si se necesita una versión en concreto del cliente y ésta existe. Hay que comprobar antes la disponibilidad con `apt search postgresql-client`
+![Conexión psql](img/postgresql/2.1-psql/conexion_psql.png)
+
+> Instala el paquete correspondiente si se necesita una versión en concreto del cliente (postgresql-client-14) y ésta existe. Hay que comprobar antes la disponibilidad con `apt search postgresql-client`
 
 ---
 
@@ -190,25 +204,38 @@ psql -h localhost -U pguser -d dbpg -W
 
 Empezaremos comprobando si la versión de Debian o la base de Ubuntu está admitida (consultando este [enlace](https://www.pgadmin.org/download/pgadmin-4-apt/)):
 
+![Comprobación pgadmin](img/postgresql/2.2-pgadmin/comprobacion_pgadmin.png)
+
 ```
 sudo apt install curl gnupg lsb-release
 
 curl -fsS https://www.pgadmin.org/static/packages_pgadmin_org.pub | sudo gpg --dearmor -o /etc/apt/keyrings/packages-pgadmin-org.gpg
 
-sudo sh -c 'echo "deb [signed-by=/etc/apt/keyrings/packages-pgadmin-org.gpg] https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/UBUNTU_CODENAME pgadmin4 main" > /etc/apt/sources.list.d/pgadmin4.list'
+sudo sh -c 'echo "deb [signed-by=/etc/apt/keyrings/packages-pgadmin-org.gpg] https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/noble pgadmin4 main" > /etc/apt/sources.list.d/pgadmin4.list'
 
 sudo apt update
 
 sudo apt install pgadmin4-desktop
 ```
 
-> Nota sobre pgAdmin en Mint: El comando oficial falla porque lsb_release -cs devuelve el nombre de Mint, el cual no es admitido por el repositorio. Para solucionarlo, hay que seguir el apartado específico de Mint en su web oficial (cambiando ese valor por el de su base Ubuntu, como jammy o noble). Tras instalarlo, se abre pgAdmin desde el menú y se conecta a la base dbpg como pguser.
+> Nota sobre pgAdmin en Mint: El comando oficial falla porque lsb_release -cs devuelve el nombre de Mint, el cual no es admitido por el repositorio. Para solucionarlo, hay que seguir el apartado específico de Mint en su web oficial (cambiando ese valor por el de su base Ubuntu, como jammy o noble). 
+
+Tras instalarlo, se abre pgAdmin desde el menú y se conecta a la base dbpg como pguser.
+
+> Para conectarnos, hacemos clic derecho en Servers > Register > Server. En General, escribimos el nombre que queramos (y si se quiere comentario, también) y en Connection escribimos:
+> - Host name/address: 192.168.248.128 (la ip real que tiene la máquina)
+> - Port: 5432
+> - Maintenance database: dbpg
+> - Username: pguser
+> - Password: la contraseña que usamos en el usuario.
+>
+> (Marcamos la casilla Save password para que no la vuelva a pedir)
+
+![Conexión pgadmin](img/postgresql/2.2-pgadmin/conexion_pgadmin.png)
 
 ---
 
 ## **_3. Clientes para MariaDB_**
-
-> **Versión:** ...
 
 ### **_3.1 Cliente de terminal: mariadb (o mysql)_**
 
@@ -226,6 +253,8 @@ mariadb -h localhost -u muser -p dbm
 
 > Nota: El parámetro -p hará que el programa solicite la contraseña en la terminal.
 
+![Conexión terminal mariadb](img/mariadb/3.1-mysql/conexion_terminal_mariadb.png)
+
 ---
 
 ### **_3.2 Cliente web: phpMyAdmin_**
@@ -238,6 +267,8 @@ sudo apt update
 sudo apt install apache2 php php-mysql php-mbstring php-zip php-gd php-curl phpmyadmin
 ```
 
+> Nota durante la instalación: Selecciona apache2 si el asistente lo pregunta y configura phpMyAdmin. La contraseña solicitada aquí es de almacenamiento interno; para conectarnos usamos el usuario **muser**.
+
 Seguidamente habilitamos la extensión necesaria de PHP y reiniciamos el servidor Apache:
 
 ```
@@ -246,21 +277,32 @@ sudo phpenmod mbstring
 sudo systemctl restart apache2
 ```
 
-> Nota durante la instalación: Selecciona apache2 si el asistente lo pregunta y configura phpMyAdmin. La contraseña solicitada aquí es de almacenamiento interno; para conectarte luego, usa tu usuario muser.
-
-> Ruta alternativa: Si la ruta web no se habilita automáticamente, ejecuta sudo a2enconf phpmyadmin y sudo systemctl reload apache2.
+> Ruta alternativa: Si la ruta web no se habilita automáticamente, ejecuta:
+> ```
+>sudo a2enconf phpmyadmin
+>
+>sudo systemctl reload apache2.
+>```
 
 Finalmente, abrimos el navegador en [http://localhost/phpmyadmin/](http://localhost/phpmyadmin/) e iniciamos sesión con muser para comprobar la base de datos.
+
+Pantalla inicial:
+
+![Conexión 1 phpMyAdmin](img/mariadb/3.2-phpmyadmin/conexion_phpmyadmin1.png)
+
+Conexión establecida:
+
+![Conexión 2 phpMyAdmin](img/mariadb/3.2-phpmyadmin/conexion_phpmyadmin2.png)
 
 ---
 
 ## **_4. Clientes para varios SGBD_**
 
-> **Versión:** ...
-
 ### **_4.1 DBeaver Community_**
 
 Descargamos el paquete .deb actual desde su [web oficial](https://dbeaver.io/download/) y lo instalamos mediante la terminal:
+
+![Descarga web DBeaver](img/dbeaver/descarga_dbeaver.png)
 
 ```
 cd ~/Descargas
@@ -269,6 +311,24 @@ sudo apt install ./NOMBRE_DEL_ARCHIVO_DBEAVER.deb
 ```
 
 Una vez abierto DBeaver, configuramos las tres conexiones apuntando a localhost (Oracle FREEPDB1 con orauser, PostgreSQL dbpg con pguser y MariaDB dbm con muser). Es normal que el programa solicite la descarga automática de los controladores JDBC al intentar conectar.
+
+> Para crear las conexiones le damos clic derecho a **DBeaver Sample Database (SQLite) > Create New Connection** y seleccionamos el icono dependiendo de la conexión que queramos crear.
+
+> Recordatorio para la creación de las conexiones:
+>
+> | Tipo de conexión | Oracle | PostgreSQL | Mariadb |
+> | --- | --- | --- | --- |
+> | Host | localhost | 192.168.248.128 | 192.168.248.128 |
+> | --- | --- | --- | --- |
+> | Puerto | 1521 | 5432 | 3306 |
+> | --- | --- | --- | --- |
+> | Base de datos | FREEPDB1 | dbpg | dbm |
+> | --- | --- | --- | --- |
+> | Usuario | orauser | pguser | muser |
+>
+> En todos debemos hacer un **Test Connection** antes de finalizar, y nos pedirá que nos descarguemos los drivers. Los descargamos y una vez que nos acepte la conexión, finalizamos.
+
+![Conexiones DBeaver](img/dbeaver/conexiones_dbeaver.png)
 
 ---
 
@@ -286,6 +346,14 @@ php -S 127.0.0.1:8080 adminer.php
 
 Para probarlo, abrimos el navegador en la misma máquina virtual entrando a [http://localhost:8080/](http://localhost:8080/). Seleccionamos el motor (PostgreSQL o MySQL/MariaDB) y probamos la conexión con los usuarios de trabajo correspondientes. Para apagar el servidor web desde la terminal, pulsamos Ctrl+C.
 
+Conexión con PostgreSQL:
+
+![Conexión PostgreSQL adminer](img/adminer/conexion_postgresql_adminer.png)
+
+Conexión con MariaDB:
+
+![Conexión MariaDB adminer](img/adminer/conexion_mariadb_adminer.png)
+
 ---
 
 ## **_Incidencias_**
@@ -294,7 +362,7 @@ Para probarlo, abrimos el navegador en la misma máquina virtual entrando a [htt
 
 Durante el inicio de SQL Developer (usando el comando `/opt/sqldeveloper/sqldeveloper.sh`) me ha saltado el error **Module javafx.base not found**: lo que ocurre es que Oracle ha dejado **AddLinuxVMOption --module-path=../../modules/javafx/linux-x64/lib**, pero la carpeta linux-64 no existe en el ZIP. Java intenta arrancar con --add-modules=javafx.base,... pero apuntando a un directorio vacío.
 
-![Incidencia JavaFX](img/error1.png)
+![Incidencia JavaFX](img/incidencias/error1.png)
 
 > El error se ha solucionado ejecutando ciertos comandos, cuyas finalidades son:
 
@@ -313,6 +381,64 @@ grep -n module-path /opt/sqldeveloper/sqldeveloper/bin/java11.conf
 
 sed -i '/module-path/d' ~/.sqldeveloper/26.2.0/product.conf
 ```
+
+---
+
+#### **_Incidencia 2_**
+
+Tras configurar las variables del entorno e intentar conectarnos, nos saltó un error de que faltaba la librería libaio y no se podía conectar:
+
+![Incidencia librería libaio](img/incidencias/error2.png)
+
+> El error se ha solucionado simplemente instalando la librería faltante con el comando `sudo apt install libaio1`
+
+En caso de que la instalación devuelva el siguiente error:
+
+![Incidencia 2 librería libaio](img/incidencias/error2.2.png)
+
+> Ejecutaremos el comando `sudo ln -s /usr/lib/x86_64-linux-gnu/libaio.so.1t64 /usr/lib/x86_64-linux-gnu/libaio.so.1` y ya podremos hacer la conexión.
+
+---
+
+#### **_Incidencia 3_**
+
+Durante la conexión con el usuario pguser y usando el comando `psql -h localhost -U pguser -d dbpg -W`, saltó un error de fallo de conexión:
+
+![Fallo en conexión psql](img/incidencias/error3.png)
+
+> El error se ha solucionado usando el comando `sudo nano /etc/postgresql/16/main/pg_hba.conf`, buscando la línea **local all all peer** abajo del todo del fichero y reemplazando **peer** por **scram-sha-256**.
+
+> Además, en vez de ejecutar el comando `psql -h localhost -U pguser -d dbpg -W`, omitiremos la parte de **-h localhost** para poder conectarnos.
+
+---
+
+### **_Incidencia 4_**
+
+Al intentar registrar el servidor local en pgAdmin 4 usando localhost (127.0.0.1), el sistema devolvía el error "Connection refused".
+
+![Conexión pgAdmin](img/incidencias/error4.png)
+
+Todo esto se debe a que el archivo de configuración principal (postgresql.conf) estaba anclado estrictamente a la IP de la tarjeta (`listen_addresses = '192.168.248.128'`).
+
+> El error se ha solucionado ajustando los datos de conexión en el cliente gráfico, de manera que en vez de apuntar a localhost, se ha utilizado directamente la IP real (192.168.248.128).
+
+---
+
+### **_Incidencia 5_**
+
+Al crear la conexión en DBeaver con MariaDB, me saltó un error durante el Test de Conexión, y es que no reconocía la conexión.
+
+![Conexión MariaDB en DBeaver](img/incidencias/error5.png)
+
+Esto se debe a una falta de permisos al crear el usuario **muser**, y es que no se le aplicaron correctamente.
+
+> El error se ha solucionado entrando a MariaDB como administrador usando `sudo mariadb` y escribiendo lo siguiente:
+>
+> ```
+> GRANT ALL PRIVILEGES ON dbm.* TO 'muser'@'%' IDENTIFIED BY 'CONTRASEÑA';
+> 
+> FLUSH PRIVILEGES;
+> ```
 
 ---
 
