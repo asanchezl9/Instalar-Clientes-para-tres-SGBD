@@ -27,6 +27,8 @@
 
 ### **_1.1 Cliente gráfico: SQL Developer_**
 
+> **Versión SQL Developer:** `26.2.0`
+
 Comenzamos con los clientes para Oracle, donde el primero será el cliente gráfico SQL Developer. Lo primero es instalar un JDK compatible con la versión de SQL Developer que vayamos a descargar, así que debemos comprobarla primero. Primero actualizaremos la lista de paquetes, seguidamente instalaremos Java y mostraremos la versión de este:
 
 ```
@@ -86,6 +88,8 @@ En caso de que el cliente esté en la misma VM (que es este caso) usaremos **loc
 
 ### **_1.2 Cliente gráfico: VS Code y extensión SQL Developer_**
 
+> **Versión VSCode:** `1.142.0`
+
 Pasamos a otro cliente gráfico. En este caso será el **VSCode y la extensión SQL Developer**. Lo primero será descargar el paquete .deb actual de VSCode (enlace [aquí](https://code.visualstudio.com/)) y una vez que lo tengamos descargado accedemos a la carpeta de **Descargas** (en caso de que no estemos en ella) e instalamos el paquete con los siguientes comandos:
 
 ![Descarga VSCode](img/oracle/1.2-VSCode_y_SQL_Developer/descarga_vscode.png)
@@ -103,6 +107,8 @@ Seguidamente, abriremos VS Code (desde la terminal es poniendo `code` y se abre)
 ---
 
 ### **_1.3 Cliente de terminal: SQL*Plus_**
+
+> **Versión SQL*Plus:** `23.26.3.0.0`
 
 Para Mint (como es este caso) usaremos los ZIP oficiales de Oracle Instant Client para Linux x86-64 Basic y SQL*Plus de la misma versión (enlace [aquí](https://www.oracle.com/database/technologies/instant-client/downloads.html)) y la vamos a descomprimir ambas en un mismo directorio. La ruta será ~/oracle_amparo
 
@@ -146,6 +152,8 @@ sqlplus orauser@//localhost:1521/FREEPDB1
 
 ### **_1.4 Cliente de terminal: SQLcl_**
 
+> **Versión SQLcl:** `26.3.0.0`
+
 Empezaremos instalando Java y comprobando la versión:
 
 ```
@@ -182,6 +190,8 @@ Ahora, probaremos la conexión con orauser y FREEPDB1 (sin contraseña)
 
 ### **_2.1 Cliente de terminal: psql_**
 
+> **Versión psql:** `16.15`
+
 Pasamos a PostgreSQL, al cliente de terminal psql: actualizaremos los repositorios, instalaremos el cliente, veremos la versión y nos conectaremos a la base de datos con **pguser** de manera segura:
 
 ```
@@ -201,6 +211,8 @@ psql -U pguser -d dbpg -W
 ---
 
 ### **_2.2 Cliente gráfico: pgAdmin 4_**
+
+> **Versión pgAdmin:** `9.18`
 
 Empezaremos comprobando si la versión de Debian o la base de Ubuntu está admitida (consultando este [enlace](https://www.pgadmin.org/download/pgadmin-4-apt/)):
 
@@ -239,6 +251,8 @@ Tras instalarlo, se abre pgAdmin desde el menú y se conecta a la base dbpg como
 
 ### **_3.1 Cliente de terminal: mariadb (o mysql)_**
 
+> **Versión MariaDB:** `15.1`
+
 Comenzaremos actualizando repositorios, instalando el cliente, viendo la versión de mariadb y probando la conexión a la base de datos con **muser**:
 
 ```
@@ -258,6 +272,8 @@ mariadb -h localhost -u muser -p dbm
 ---
 
 ### **_3.2 Cliente web: phpMyAdmin_**
+
+> **Versión phpMyAdmin:** `8.3.6`
 
 Al igual que antes con mariadb, actualizamos repositorios e instalamos el cliente:
 
@@ -300,6 +316,8 @@ Conexión establecida:
 
 ### **_4.1 DBeaver Community_**
 
+> **Versión DBeaver:** `26.2.3`
+
 Descargamos el paquete .deb actual desde su [web oficial](https://dbeaver.io/download/) y lo instalamos mediante la terminal:
 
 ![Descarga web DBeaver](img/dbeaver/descarga_dbeaver.png)
@@ -333,6 +351,8 @@ Una vez abierto DBeaver, configuramos las tres conexiones apuntando a localhost 
 ---
 
 ### **_4.2 Adminer_**
+
+> **Versión Adminer:** `6.1.2`
 
 Adminer es un cliente web muy ligero compuesto por un único archivo PHP. Instalamos el paquete PHP CLI para la terminal, descargamos el archivo y levantamos un servidor local de prueba:
 
