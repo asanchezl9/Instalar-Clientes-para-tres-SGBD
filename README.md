@@ -337,11 +337,8 @@ Una vez abierto DBeaver, configuramos las tres conexiones apuntando a localhost 
 > | Tipo de conexión | Oracle | PostgreSQL | Mariadb |
 > | --- | --- | --- | --- |
 > | Host | localhost | 192.168.248.128 | 192.168.248.128 |
-> | --- | --- | --- | --- |
 > | Puerto | 1521 | 5432 | 3306 |
-> | --- | --- | --- | --- |
 > | Base de datos | FREEPDB1 | dbpg | dbm |
-> | --- | --- | --- | --- |
 > | Usuario | orauser | pguser | muser |
 >
 > En todos debemos hacer un **Test Connection** antes de finalizar, y nos pedirá que nos descarguemos los drivers. Los descargamos y una vez que nos acepte la conexión, finalizamos.
